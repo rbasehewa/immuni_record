@@ -1,0 +1,56 @@
+<%= form_with(model: immunisation, class: "bg-white rounded-xl shadow p-6 space-y-4") do |f| %>
+  <% if immunisation.errors.any? %>
+    <div class="rounded-md bg-red-50 text-red-800 p-3 text-sm">
+      <p class="font-semibold mb-1"><%= pluralize(immunisation.errors.count, "error") %> prevented saving:</p>
+      <ul class="list-disc ml-5">
+        <% immunisation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid gap-4">
+    <div>
+      <%= f.label :patient_id, "Patient", class: "block text-sm font-medium mb-1" %>
+      <%= f.collection_select :patient_id, Patient.order(:last_name, :first_name),
+            :id, ->(p){ "#{p.last_name}, #{p.first_name}" },
+            { prompt: "Select patient" },
+            { class: "w-full rounded-lg border border-gray-300 px-3 py-2" } %>
+    </div>
+
+    <div>
+      <%= f.label :vaccine_id, "Vaccine", class: "block text-sm font-medium mb-1" %>
+      <%= f.collection_select :vaccine_id, Vaccine.order(:name),
+            :id, :name,
+            { prompt: "Select vaccine" },
+            { class: "w-full rounded-lg border border-gray-300 px-3 py-2" } %>
+    </div>
+
+    <div>
+      <%= f.label :administered_on, class: "block text-sm font-medium mb-1" %>
+      <%= f.date_field :administered_on, class: "w-full rounded-lg border border-gray-300 px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :administered_by, class: "block text-sm font-medium mb-1" %>
+      <%= f.text_field :administered_by, class: "w-full rounded-lg border border-gray-300 px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :batch_number, class: "block text-sm font-medium mb-1" %>
+      <%= f.text_field :batch_number, class: "w-full rounded-lg border border-gray-300 px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :next_due_date, class: "block text-sm font-medium mb-1" %>
+      <%= f.date_field :next_due_date, class: "w-full rounded-lg border border-gray-300 px-3 py-2" %>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3 pt-2">
+    <%= f.submit(immunisation.persisted? ? "Update Immunisation" : "Create Immunisation",
+        class: "inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500") %>
+    <%= link_to "Back to immunisations", immunisations_path, class: "text-sm text-gray-600 hover:text-gray-900" %>
+  </div>
+<% end %>

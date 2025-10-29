@@ -1,0 +1,48 @@
+# --- Tool & package managers ---
+/.bundle
+/vendor/bundle
+
+# --- Env files ---
+/.env*
+
+# --- Logs & temp ---
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# PID files: ignore files, keep dir
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# --- Storage (uploads in dev) ---
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+
+# --- Databases (SQLite) ---
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-*
+
+# --- Assets/build outputs ---
+/public/assets
+/public/packs
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
+# --- Credentials keys (keep encrypted file in git, ignore keys) ---
+/config/*.key
+/config/master.key
+
+# --- Node (if added later) ---
+/node_modules
+
+# --- OS / editor junk ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

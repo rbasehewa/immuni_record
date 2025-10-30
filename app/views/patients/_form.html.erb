@@ -1,45 +1,40 @@
-<%= form_with(model: patient, class: "bg-white rounded-xl shadow p-6 space-y-4") do |f| %>
-  <% if patient.errors.any? %>
-    <div class="rounded-md bg-red-50 text-red-800 p-3 text-sm">
-      <p class="font-semibold mb-1"><%= pluralize(patient.errors.count, "error") %> prevented saving:</p>
-      <ul class="list-disc ml-5">
-        <% patient.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: patient, local: true, class: "card") do |f| %>
+  <div class="card-body">
 
-  <div class="grid gap-4">
-    <div>
-      <%= f.label :first_name, class: "block text-sm font-medium mb-1" %>
-      <%= f.text_field :first_name, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-    </div>
+    <% if patient.errors.any? %>
+      <div class="alert alert-danger">
+        <h2 class="h6 mb-2"><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+        <ul class="mb-0">
+          <% patient.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-    <div>
-      <%= f.label :last_name, class: "block text-sm font-medium mb-1" %>
-      <%= f.text_field :last_name, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <div class="mb-3">
+      <%= f.label :first_name, class: "form-label" %>
+      <%= f.text_field :first_name, class: "form-control" %>
     </div>
 
-    <div>
-      <%= f.label :date_of_birth, class: "block text-sm font-medium mb-1" %>
-      <%= f.date_field :date_of_birth, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <div class="mb-3">
+      <%= f.label :last_name, class: "form-label" %>
+      <%= f.text_field :last_name, class: "form-control" %>
     </div>
 
-    <div>
-      <%= f.label :medicare_number, class: "block text-sm font-medium mb-1" %>
-      <%= f.text_field :medicare_number, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <div class="mb-3">
+      <%= f.label :date_of_birth, class: "form-label" %>
+      <%= f.date_field :date_of_birth, class: "form-control" %>
     </div>
 
-    <div>
-      <%= f.label :email, class: "block text-sm font-medium mb-1" %>
-      <%= f.email_field :email, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <div class="mb-3">
+      <%= f.label :medicare_number, class: "form-label" %>
+      <%= f.text_field :medicare_number, class: "form-control" %>
     </div>
+
   </div>
-
-  <div class="flex items-center gap-3 pt-2">
-    <%= f.submit (patient.persisted? ? "Update Patient" : "Create Patient"),
-          class: "inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
-    <%= link_to "Back to patients", patients_path, class: "text-sm text-gray-600 hover:text-gray-900" %>
+  <div class="card-footer d-flex justify-content-end gap-2">
+    <%= link_to "Cancel", patients_path, class: "btn btn-outline-secondary" %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

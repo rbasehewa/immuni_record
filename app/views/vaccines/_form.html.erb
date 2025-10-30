@@ -1,37 +1,40 @@
-<%= form_with(model: vaccine, class: "bg-white rounded-xl shadow p-6 space-y-4") do |f| %>
-  <% if vaccine.errors.any? %>
-    <div class="rounded-md bg-red-50 text-red-800 p-3 text-sm">
-      <p class="font-semibold mb-1"><%= pluralize(vaccine.errors.count, "error") %> prevented saving:</p>
-      <ul class="list-disc ml-5">
-        <% vaccine.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: vaccine, local: true, class: "card") do |f| %>
+  <div class="card-body">
+    <% if vaccine.errors.any? %>
+      <div class="alert alert-danger">
+        <p class="fw-semibold mb-2"><%= pluralize(vaccine.errors.count, "error") %> prevented saving:</p>
+        <ul class="mb-0 ps-3">
+          <% vaccine.errors.full_messages.each { |m| %><li><%= m %></li><% } %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="grid gap-4">
-    <div>
-      <%= f.label :name, class: "block text-sm font-medium mb-1" %>
-      <%= f.text_field :name, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500" %>
-    </div>
-    <div>
-      <%= f.label :manufacturer, class: "block text-sm font-medium mb-1" %>
-      <%= f.text_field :manufacturer, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500" %>
-    </div>
-    <div>
-      <%= f.label :dose_number, "Dose number", class: "block text-sm font-medium mb-1" %>
-      <%= f.number_field :dose_number, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500" %>
-    </div>
-    <div>
-      <%= f.label :schedule_interval, "Interval (days)", class: "block text-sm font-medium mb-1" %>
-      <%= f.number_field :schedule_interval, class: "w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500" %>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <%= f.label :name, class: "form-label" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :manufacturer, class: "form-label" %>
+        <%= f.text_field :manufacturer, class: "form-control" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :dose_number, "Dose number", class: "form-label" %>
+        <%= f.number_field :dose_number, class: "form-control" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :schedule_interval, "Interval (days)", class: "form-label" %>
+        <%= f.number_field :schedule_interval, class: "form-control" %>
+      </div>
     </div>
   </div>
 
-  <div class="flex items-center gap-3 pt-2">
-    <%= f.submit(vaccine.persisted? ? "Update Vaccine" : "Create Vaccine",
-        class: "inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500") %>
-    <%= link_to "Back to vaccines", vaccines_path, class: "text-sm text-gray-600 hover:text-gray-900" %>
-  </div>
+<div class="card-footer d-flex justify-content-end gap-2">
+  <%= link_to "Cancel",
+              (vaccine.persisted? ? vaccine_path(vaccine) : vaccines_path),
+              class: "btn btn-outline-secondary" %>
+  <%= f.submit (vaccine.persisted? ? "Save changes" : "Create Vaccine"),
+              class: "btn btn-primary" %>
+</div>
+
 <% end %>

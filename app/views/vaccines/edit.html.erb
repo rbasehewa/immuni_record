@@ -1,2 +1,9 @@
-<h1 class="text-2xl font-semibold mb-4">Edit vaccine</h1>
+<% content_for :title, "Edit vaccine" %>
+
+<div class="mb-3">
+  <%= link_to "Back", vaccines_path, class: "btn btn-outline-secondary btn-sm" %>
+</div>
+
+<h1 class="display-6 fw-semibold mb-3">Edit vaccine</h1>
+
 <%= render "form", vaccine: @vaccine %>

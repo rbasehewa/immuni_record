@@ -1,15 +1,20 @@
-<div class="mb-4">
-  <%= link_to "Back", vaccines_path, class: "text-sm text-gray-600 hover:underline" %>
+<div class="mb-3">
+  <%= link_to "Back", vaccines_path, class: "btn btn-outline-secondary btn-sm" %>
 </div>
 
-<div class="rounded-lg border border-gray-200 bg-white p-4 space-y-2">
-  <h2 class="text-xl font-semibold"><%= @vaccine.name %></h2>
-  <p><span class="font-medium">Manufacturer:</span> <%= @vaccine.manufacturer %></p>
-  <p><span class="font-medium">Dose #:</span> <%= @vaccine.dose_number %></p>
-  <p><span class="font-medium">Interval (days):</span> <%= @vaccine.schedule_interval %></p>
+<div class="card mb-3">
+  <div class="card-body">
+    <h2 class="h4 fw-semibold mb-3"><%= @vaccine.name %></h2>
+
+    <p class="mb-2"><span class="fw-semibold">Manufacturer:</span> <%= @vaccine.manufacturer %></p>
+    <p class="mb-2"><span class="fw-semibold">Dose #:</span> <%= @vaccine.dose_number %></p>
+    <p class="mb-0"><span class="fw-semibold">Interval (days):</span> <%= @vaccine.schedule_interval %></p>
+  </div>
 </div>
 
-<div class="mt-4 flex gap-2">
-  <%= link_to "Edit", edit_vaccine_path(@vaccine), class: "rounded-md border px-4 py-2 hover:bg-gray-50" %>
-  <%= button_to "Delete", @vaccine, method: :delete, data: {confirm: "Delete this vaccine?"}, class: "rounded-md border px-4 py-2 text-red-600 hover:bg-red-50" %>
+<div class="d-flex flex-wrap gap-2">
+  <%= link_to "Edit", edit_vaccine_path(@vaccine), class: "btn btn-secondary" %>
+  <%= link_to "Delete", @vaccine,
+        data: { turbo_method: :delete, turbo_confirm: "Delete this vaccine?" },
+        class: "btn btn-danger" %>
 </div>

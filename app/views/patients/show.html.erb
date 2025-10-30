@@ -1,14 +1,34 @@
 <% content_for :title, "Showing patient" %>
 
-<div class="md:w-2/3 w-full">
+<div class="container">
   <% if notice.present? %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% end %>
 
-  <h1 class="font-bold text-4xl">Showing patient</h1>
+  <h1 class="display-6 fw-semibold mb-4">Showing patient</h1>
 
-  <%= render @patient %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <%= render @patient %>
+    </div>
+  </div>
 
-  <%= link_to "Edit this patient", edit_patient_path(@patient), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to patients", patients_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this patient", @patient, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <div class="d-flex flex-wrap gap-2">
+    <%= link_to "Edit this patient", edit_patient_path(@patient), class: "btn btn-secondary" %>
+    <%= link_to "Back to patients", patients_path, class: "btn btn-outline-secondary" %>
+
+    <%= link_to "Destroy this patient", @patient,
+          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+          class: "btn btn-danger" %>
+    <!-- If you prefer a real <form><button>, swap to this:
+    <%= button_to "Destroy this patient", @patient,
+          method: :delete,
+          form: { class: "d-inline" },
+          data: { turbo_confirm: "Are you sure?" },
+          class: "btn btn-danger" %>
+    -->
+  </div>
 </div>

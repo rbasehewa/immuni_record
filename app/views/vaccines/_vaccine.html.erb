@@ -1,18 +1,21 @@
-<div id="<%= dom_id vaccine %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Name:</strong>
+<div id="<%= dom_id(vaccine) %>" class="my-4">
+  <div class="mb-3">
+    <strong class="d-block fw-semibold mb-1">Name:</strong>
     <%= vaccine.name %>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Manufacturer:</strong>
+
+  <div class="mb-3">
+    <strong class="d-block fw-semibold mb-1">Manufacturer:</strong>
     <%= vaccine.manufacturer %>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Dose number:</strong>
+
+  <div class="mb-3">
+    <strong class="d-block fw-semibold mb-1">Dose number:</strong>
     <%= vaccine.dose_number %>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Schedule interval:</strong>
+
+  <div class="mb-0">
+    <strong class="d-block fw-semibold mb-1">Schedule interval:</strong>
     <%= vaccine.schedule_interval %>
   </div>
 </div>
